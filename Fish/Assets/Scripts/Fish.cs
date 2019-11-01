@@ -24,18 +24,22 @@ public class Fish : MonoBehaviour
         avoidRadius = myManager.AvoidRadius;
         RaycastHit hit = new RaycastHit();
         Vector3 direction = Vector3.zero;
+
+        //Avoid obstacles
+
         
-        if (!b.Contains(transform.position))            
+
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, myManager.raycastLenght))
+        {
+            turning = true;
+            Debug.DrawRay(this.transform.position, this.transform.forward * myManager.raycastLenght, Color.red);
+            direction = Vector3.Reflect(this.transform.forward, hit.normal);
+        } 
+        //Keep within boundaries
+        else if (!b.Contains(transform.position))
         {
             turning = true;
             direction = b.center - transform.position;
-            
-        }
-        else if (Physics.Raycast(this.transform.position, this.transform.forward * 50, out hit))
-        {
-            turning = true;
-            Debug.DrawRay(this.transform.position, this.transform.forward * 50, Color.red);
-            direction = Vector3.Reflect(this.transform.forward, hit.normal);
         }
         else
         {
@@ -51,14 +55,14 @@ public class Fish : MonoBehaviour
         }
         else
         {
-            if (Random.Range(0, 100) < 10)
+            if (Random.Range(0, 100) < 3)
             {
                 speed = Random.Range(myManager.MinSpeed, myManager.MaxSpeed);
             }
 
-            if (Random.Range(0, 100) < 10) AddFlockBehaviourRules();
+            if (Random.Range(0, 100) < 15) AddFlockBehaviourRules();
         }
-    
+                
         transform.position += transform.forward * speed * Time.deltaTime;    
     }
 

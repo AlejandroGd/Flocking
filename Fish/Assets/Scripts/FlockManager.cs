@@ -8,6 +8,9 @@ public class FlockManager : MonoBehaviour
     [SerializeField] int numFish = 20;    
     [SerializeField] public Vector3 swimLimits = new Vector3(5, 5, 5);
 
+    [SerializeField] bool movingTarget = false;
+    [SerializeField] public float raycastLenght = 25f;
+
     [SerializeField] public GameObject target;
     public GameObject[] allFish;
 
@@ -32,7 +35,8 @@ public class FlockManager : MonoBehaviour
             Vector3 position = this.transform.position + new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
                                       Random.Range(-swimLimits.y, swimLimits.y),
                                       Random.Range(-swimLimits.z, swimLimits.z));
-            
+            if (position.y < 0) position.y = 0; //No start position below the floor
+
             allFish[i] = Instantiate(fishPrefab, position, Quaternion.identity);
             allFish[i].GetComponent<Fish>().myManager = this;
             allFish[i].transform.parent = this.transform;           
@@ -42,11 +46,14 @@ public class FlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Random.Range(0, 100) < 10)
-        {
-            target.transform.position = this.transform.position + new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
-                                                    Random.Range(-swimLimits.y, swimLimits.y),
-                                                    Random.Range(-swimLimits.z, swimLimits.z));
-        }
+        if (movingTarget && Random.Range(0, 100) < 1)  ChangeTargetPosition();
+    }
+
+    private void ChangeTargetPosition()
+    {       
+        target.transform.position = this.transform.position + 
+                                    new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
+                                                Random.Range(-swimLimits.y, swimLimits.y),
+                                                Random.Range(-swimLimits.z, swimLimits.z));       
     }
 }
