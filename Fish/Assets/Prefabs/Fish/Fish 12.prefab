@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4167116889523587048}
   - component: {fileID: 3882220243011343009}
-  m_Layer: 0
+  - component: {fileID: 804883855790074911}
+  - component: {fileID: 7280292564437077052}
+  m_Layer: 9
   m_Name: Fish 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +48,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myManager: {fileID: 0}
   avoidRadius: 1
+  meshRenderer: {fileID: 8350316576688109313}
+--- !u!135 &804883855790074911
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129986821996995544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7280292564437077052
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129986821996995544}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &4287248770300464634
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54,11 +86,11 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8350316576690301377}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -72,6 +104,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: b571f3e49a473924998d589bb8280238, type: 3}
       propertyPath: m_Name
       value: TropicalFish12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b571f3e49a473924998d589bb8280238, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b571f3e49a473924998d589bb8280238, type: 3}
       propertyPath: m_LocalPosition.x
@@ -129,6 +165,12 @@ GameObject:
 --- !u!4 &8350316576690009569 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b571f3e49a473924998d589bb8280238,
+    type: 3}
+  m_PrefabInstance: {fileID: 8350316576690401121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8350316576688109313 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: b571f3e49a473924998d589bb8280238,
     type: 3}
   m_PrefabInstance: {fileID: 8350316576690401121}
   m_PrefabAsset: {fileID: 0}
