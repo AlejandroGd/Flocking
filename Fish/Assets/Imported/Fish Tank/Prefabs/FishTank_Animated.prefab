@@ -284,7 +284,8 @@ GameObject:
   - component: {fileID: 4306320318769322}
   - component: {fileID: 33883798906387236}
   - component: {fileID: 23248682947294804}
-  m_Layer: 0
+  - component: {fileID: 3258935632428215476}
+  m_Layer: 10
   m_Name: TankHeater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,6 +351,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &3258935632428215476
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537982029570778}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1546694345671676
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +447,8 @@ GameObject:
   - component: {fileID: 4623301698014220}
   - component: {fileID: 33883290295237462}
   - component: {fileID: 23099932063899394}
-  m_Layer: 0
+  - component: {fileID: 6764415206293681604}
+  m_Layer: 10
   m_Name: FillterPump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,6 +514,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &6764415206293681604
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750477311918322}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1882633145650028
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +684,64 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &3583942530871977944
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197030107890159273}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1655825579664448997
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197030107890159273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18605153, y: 0.036071517, z: 0.16667055}
+  m_Center: {x: 0.000000014612463, y: -0.0066985544, z: -0.001831533}
+--- !u!54 &3876405180010631544
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808529945738668471}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &5959412913135526644
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808529945738668471}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0.000000007450581, y: -0.06, z: 0.000000029802326}
 --- !u!1001 &511652710784378407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -724,6 +816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shell
       objectReference: {fileID: 0}
+    - target: {fileID: 1699683662402832, guid: 53fc8de79e42f8743835281a3e8a0f4c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4251845100110192, guid: 53fc8de79e42f8743835281a3e8a0f4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.31079245
@@ -770,6 +866,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53fc8de79e42f8743835281a3e8a0f4c, type: 3}
+--- !u!1 &5197030107890159273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1699683662402832, guid: 53fc8de79e42f8743835281a3e8a0f4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5195331544144681913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5194512413700201161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4251845100110192, guid: 53fc8de79e42f8743835281a3e8a0f4c,
@@ -850,13 +952,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sponge
       objectReference: {fileID: 0}
+    - target: {fileID: 1167018629374414, guid: 823a751069475d64191a59753d95c864, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4033043824100994, guid: 823a751069475d64191a59753d95c864, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.406
       objectReference: {fileID: 0}
     - target: {fileID: 4033043824100994, guid: 823a751069475d64191a59753d95c864, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: 1.119
       objectReference: {fileID: 0}
     - target: {fileID: 4033043824100994, guid: 823a751069475d64191a59753d95c864, type: 3}
       propertyPath: m_LocalPosition.z
@@ -896,6 +1002,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 823a751069475d64191a59753d95c864, type: 3}
+--- !u!1 &5808529945738668471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1167018629374414, guid: 823a751069475d64191a59753d95c864,
+    type: 3}
+  m_PrefabInstance: {fileID: 5807442641702439033}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5806963289801789179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4033043824100994, guid: 823a751069475d64191a59753d95c864,
