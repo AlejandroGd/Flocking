@@ -27,7 +27,7 @@ public class FlockManager : MonoBehaviour
     [Range(0.0f, 5.0f)]
     [SerializeField] float rotationSpeed; public float RotationSpeed { get => rotationSpeed; }
 
-
+    [SerializeField] public bool FlockDebug = false;
     [SerializeField] public GameObject debugBall;
 
 

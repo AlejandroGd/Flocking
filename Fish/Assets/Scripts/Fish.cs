@@ -31,21 +31,25 @@ public class Fish : MonoBehaviour
         {
             //Avoid obstacles
             turning = true;
-            Debug.DrawRay(this.transform.position, this.transform.forward * myManager.raycastLenght, Color.red);
+            if (myManager.FlockDebug)
+            {             
+                Debug.DrawRay(this.transform.position, this.transform.forward * myManager.raycastLenght, Color.red);
+                meshRenderer.material.color = Color.red;
+            }
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
-            meshRenderer.material.color = Color.red;
+            
         }         
         else if (IsOutsideSwimLimits())
         {
             //Keep within boundaries
             turning = true;
             direction = myManager.transform.position - transform.position;
-            meshRenderer.material.color = Color.yellow;
+            if (myManager.FlockDebug) meshRenderer.material.color = Color.yellow;
         }
         else
         {
             //Normal Flock behaviour
-            meshRenderer.material.color = Color.green;
+            if (myManager.FlockDebug) meshRenderer.material.color = Color.green;
             turning = false;
         }
 
