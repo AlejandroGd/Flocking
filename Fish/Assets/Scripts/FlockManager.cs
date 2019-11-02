@@ -6,7 +6,8 @@ public class FlockManager : MonoBehaviour
 {
     [SerializeField] GameObject fishPrefab;
     [SerializeField] int numFish = 20;    
-    [SerializeField] public Vector3 swimLimits = new Vector3(5, 5, 5);
+    [SerializeField] public Vector3 swimAreaLimit = new Vector3(5, 5, 5);
+    [SerializeField] Bounds tankLimit;
 
     [SerializeField] bool movingTarget = false;
     [SerializeField] public float raycastLenght = 25f;
@@ -33,13 +34,15 @@ public class FlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
+
         allFish = new GameObject[numFish];
         
         for (int i=0; i<numFish;i++)
         {
-            Vector3 position = this.transform.position + new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
-                                      Random.Range(-swimLimits.y, swimLimits.y),
-                                      Random.Range(-swimLimits.z, swimLimits.z));            
+            SwimBoundary limits = GetSwimmingBoundary();
+            Vector3 position = new Vector3(Random.Range(limits.minX, limits.maxX),
+                                           Random.Range(limits.minY, limits.maxY),
+                                           Random.Range(limits.minZ, limits.maxZ));
 
             allFish[i] = Instantiate(fishPrefab, position, Quaternion.identity);
             allFish[i].GetComponent<Fish>().myManager = this;
@@ -54,10 +57,38 @@ public class FlockManager : MonoBehaviour
     }
 
     private void ChangeTargetPosition()
-    {       
-        target.transform.position = this.transform.position + 
-                                    new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
-                                                Random.Range(-swimLimits.y, swimLimits.y),
-                                                Random.Range(-swimLimits.z, swimLimits.z));       
+    {
+        SwimBoundary limits = GetSwimmingBoundary();
+        target.transform.position = new Vector3(Random.Range(limits.minX, limits.maxX),
+                                                Random.Range(limits.minY, limits.maxY),
+                                                Random.Range(limits.minZ, limits.maxZ));       
     }
+
+    //The swim area may not be enclosed within the tank if the Flock manager is moved near to the edge of the fish tank.
+    //This function returns a vector that represent the area within the fish can swim. (The union between the swim area and the tank area)
+    public SwimBoundary GetSwimmingBoundary()
+    {
+        SwimBoundary limit;
+
+        limit.minX = tankLimit.center.x - (tankLimit.extents.x / 2);
+        limit.maxX = tankLimit.center.x + (tankLimit.extents.x / 2);
+        limit.minY = tankLimit.center.y - (tankLimit.extents.y / 2);
+        limit.maxY = tankLimit.center.y + (tankLimit.extents.y / 2);
+        limit.minZ = tankLimit.center.z - (tankLimit.extents.z / 2);
+        limit.maxZ = tankLimit.center.z + (tankLimit.extents.z / 2);
+
+        if (limit.minX < this.transform.position.x - swimAreaLimit.x) limit.minX = this.transform.position.x - swimAreaLimit.x;
+        if (limit.maxX > this.transform.position.x + swimAreaLimit.x) limit.maxX = this.transform.position.x + swimAreaLimit.x;
+        if (limit.minY < this.transform.position.y - swimAreaLimit.y) limit.minY = this.transform.position.y - swimAreaLimit.y;
+        if (limit.maxY > this.transform.position.y + swimAreaLimit.y) limit.maxY = this.transform.position.y + swimAreaLimit.y;        
+        if (limit.minZ < this.transform.position.z - swimAreaLimit.z) limit.minZ = this.transform.position.z - swimAreaLimit.z;
+        if (limit.maxZ > this.transform.position.z + swimAreaLimit.z) limit.maxZ = this.transform.position.z + swimAreaLimit.z;
+                     
+        return limit;
+    }   
+}
+
+public struct SwimBoundary
+{
+    public float minX, maxX, minY, maxY, minZ, maxZ;
 }

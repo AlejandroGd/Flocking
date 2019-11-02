@@ -8,8 +8,7 @@ public class Fish : MonoBehaviour
     float speed;
     public float avoidRadius = 1.0f;
 
-    bool turning = false;
-    Bounds b;
+    bool turning = false;    
 
     [SerializeField] bool fishDebug = false;
 
@@ -18,14 +17,7 @@ public class Fish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = Random.Range(myManager.MinSpeed, myManager.MaxSpeed);
-        b = new Bounds(myManager.transform.position, myManager.swimLimits);
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-     
+        speed = Random.Range(myManager.MinSpeed, myManager.MaxSpeed);  
     }
 
     // Update is called once per frame
@@ -33,8 +25,7 @@ public class Fish : MonoBehaviour
     {
         avoidRadius = myManager.AvoidRadius;
         RaycastHit hit = new RaycastHit();
-        Vector3 direction = Vector3.zero;
-                     
+        Vector3 direction = Vector3.zero;                     
         
         if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, myManager.raycastLenght, LayerMask.GetMask("Obstacles")))
         {
@@ -43,18 +34,17 @@ public class Fish : MonoBehaviour
             Debug.DrawRay(this.transform.position, this.transform.forward * myManager.raycastLenght, Color.red);
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
             meshRenderer.material.color = Color.red;
-        } 
-        //Keep within boundaries
-        else
-       
-        if (IsOutsideSwimLimits())
+        }         
+        else if (IsOutsideSwimLimits())
         {
+            //Keep within boundaries
             turning = true;
             direction = myManager.transform.position - transform.position;
             meshRenderer.material.color = Color.yellow;
         }
         else
         {
+            //Normal Flock behaviour
             meshRenderer.material.color = Color.green;
             turning = false;
         }
@@ -68,11 +58,13 @@ public class Fish : MonoBehaviour
         }
         else
         {
+            //Randomly change speed now and then so the fish don end swimming all at the same speed
             if (Random.Range(0, 100) < 3)
             {
                 speed = Random.Range(myManager.MinSpeed, myManager.MaxSpeed);
             }
 
+            //Flock behaviour rules do not need to be added on every frame (too expensive)
             if (Random.Range(0, 100) < 15) AddFlockBehaviourRules();
         }
                 
@@ -81,25 +73,22 @@ public class Fish : MonoBehaviour
 
     private bool IsOutsideSwimLimits()
     {
-        Vector3 pos = transform.position;
-        Vector3 limit = myManager.swimLimits;
-        Vector3 fmPos = myManager.transform.position;
+        Vector3 fishPos = transform.position;
+        SwimBoundary limit = myManager.GetSwimmingBoundary();        
 
-        if (pos.x < fmPos.x - limit.x ||
-            pos.x > fmPos.x + limit.x ||
-            pos.y < fmPos.y - limit.y ||
-            pos.y > fmPos.y + limit.y ||
-            pos.z < fmPos.z - limit.z ||
-            pos.z > fmPos.z + limit.z)
+        if (fishPos.x < limit.minX ||
+            fishPos.x > limit.maxX ||
+            fishPos.y < limit.minY ||
+            fishPos.y > limit.maxY ||
+            fishPos.z < limit.minZ ||
+            fishPos.z > limit.maxZ)
         {
             return true;
         }
         else
         {
             return false;
-        }
-
-        
+        }        
     }
 
     private void AddFlockBehaviourRules()
@@ -112,19 +101,6 @@ public class Fish : MonoBehaviour
         int neighbourCount = 0;
         float groupSpeed = 0.01f;
 
-        foreach (GameObject fish in allFish)
-        {
-            if (fish != this.gameObject)
-            {
-                neighbourDistance = Vector3.Distance(fish.transform.position, this.transform.position);
-                if (neighbourDistance <= myManager.NeighbourDistance)
-                {
-                    neighbourCount++;
-                }
-            }
-        }
-
-        neighbourCount += 0;
         neighbourCount = 0;
 
         foreach (GameObject fish in allFish)
