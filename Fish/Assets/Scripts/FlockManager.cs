@@ -27,8 +27,11 @@ public class FlockManager : MonoBehaviour
     [Range(0.0f, 5.0f)]
     [SerializeField] float rotationSpeed; public float RotationSpeed { get => rotationSpeed; }
 
+
+    [Header("Debug Options")]
     [SerializeField] public bool FlockDebug = false;
     [SerializeField] public GameObject debugBall;
+    [SerializeField] public float rayCastDistance = 1f;
 
 
     // Start is called before the first frame update

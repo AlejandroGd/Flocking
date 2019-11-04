@@ -7,6 +7,7 @@ public class Fish : MonoBehaviour
     public FlockManager myManager;
     float speed;
     public float avoidRadius = 1.0f;
+    float raycastDistance = 1f;
 
     bool turning = false;    
 
@@ -24,16 +25,22 @@ public class Fish : MonoBehaviour
     void Update()
     {
         avoidRadius = myManager.AvoidRadius;
+        raycastDistance = myManager.rayCastDistance;
         RaycastHit hit = new RaycastHit();
-        Vector3 direction = Vector3.zero;                     
+        Vector3 direction = Vector3.zero;
+
         
-        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, myManager.raycastLenght, LayerMask.GetMask("Obstacles")))
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, myManager.raycastLenght, LayerMask.GetMask("Obstacles")) ||
+            Physics.Raycast(this.transform.position, this.transform.right, out hit, raycastDistance, LayerMask.GetMask("Obstacles")) ||
+            Physics.Raycast(this.transform.position, -this.transform.right, out hit, raycastDistance, LayerMask.GetMask("Obstacles")))
         {
             //Avoid obstacles
             turning = true;
             if (myManager.FlockDebug)
             {             
                 Debug.DrawRay(this.transform.position, this.transform.forward * myManager.raycastLenght, Color.red);
+                Debug.DrawRay(this.transform.position, this.transform.right * raycastDistance, Color.red);
+                Debug.DrawRay(this.transform.position, -this.transform.right * raycastDistance, Color.red);
                 meshRenderer.material.color = Color.red;
             }
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
@@ -149,5 +156,10 @@ public class Fish : MonoBehaviour
     private void DebugCenterOfMass(Vector3 position)
     {
         myManager.debugBall.transform.position = position;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (fishDebug) Debug.Log("Touchning");
     }
 }

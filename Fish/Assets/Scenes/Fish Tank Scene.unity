@@ -519,7 +519,7 @@ MonoBehaviour:
   tankLimit:
     m_Center: {x: 0, y: 70, z: 0}
     m_Extent: {x: 89, y: 25, z: 40}
-  movingTarget: 0
+  movingTarget: 1
   raycastLenght: 15
   target: {fileID: 499923464}
   allFish: []
@@ -581,7 +581,7 @@ MonoBehaviour:
   tankLimit:
     m_Center: {x: 0, y: 70, z: 0}
     m_Extent: {x: 89, y: 25, z: 40}
-  movingTarget: 0
+  movingTarget: 1
   raycastLenght: 15
   target: {fileID: 1620607034}
   allFish: []
