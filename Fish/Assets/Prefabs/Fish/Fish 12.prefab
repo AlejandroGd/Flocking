@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4167116889523587048}
   - component: {fileID: 3882220243011343009}
-  - component: {fileID: 2573627337506995666}
+  - component: {fileID: 1823125441974060829}
   m_Layer: 9
   m_Name: Fish 12
   m_TagString: Untagged
@@ -46,22 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myManager: {fileID: 0}
-  avoidRadius: 1
   fishDebug: 0
   meshRenderer: {fileID: 8350316576688109313}
---- !u!135 &2573627337506995666
-SphereCollider:
+--- !u!114 &1823125441974060829
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129986821996995544}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.6
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea5008425fbe70e4aae3e167047b7efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidRadius: 1
 --- !u!54 &4287248770300464634
 Rigidbody:
   m_ObjectHideFlags: 0
