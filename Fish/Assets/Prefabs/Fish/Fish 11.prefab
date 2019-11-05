@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!54 &1041696736586490598
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060077584212390982}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &6568867174578784385
 GameObject:
   m_ObjectHideFlags: 0
@@ -25,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3423897903270453716}
+  - component: {fileID: 5512825302707565900}
   - component: {fileID: 8063304381879124948}
   - component: {fileID: 8616394130826447187}
+  - component: {fileID: 1540454592667019713}
   m_Layer: 9
   m_Name: Fish 11
   m_TagString: Untagged
@@ -49,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5512825302707565900
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568867174578784385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.43
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8063304381879124948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +63,7 @@ MonoBehaviour:
   myManager: {fileID: 0}
   fishDebug: 0
   meshRenderer: {fileID: 4060077584214649478}
+  chasingLight: 0
 --- !u!114 &8616394130826447187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +77,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avoidRadius: 1
+--- !u!114 &1540454592667019713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568867174578784385}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839d0878e3225a74692c2b604b75ea30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  withinTargetAreaDistance: 3.5
+  slowDownDistance: 5.5
+  chaseSpeed: 4
+  rotationSpeed: 1
+  timeCheckingLight: 4
 --- !u!1001 &4060077584212357862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,14 +153,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11100000, guid: aa7bc6ed8d59e2143a4ccb40c3adfd77, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aa7bc6ed8d59e2143a4ccb40c3adfd77, type: 3}
---- !u!1 &4060077584212390982 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: aa7bc6ed8d59e2143a4ccb40c3adfd77,
-    type: 3}
-  m_PrefabInstance: {fileID: 4060077584212357862}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4060077584212748390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: aa7bc6ed8d59e2143a4ccb40c3adfd77,

@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4167116889523587048}
+  - component: {fileID: 1063622884229106221}
   - component: {fileID: 3882220243011343009}
   - component: {fileID: 1823125441974060829}
+  - component: {fileID: 3108106689908505384}
   m_Layer: 9
   m_Name: Fish 12
   m_TagString: Untagged
@@ -33,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1063622884229106221
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129986821996995544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.29
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3882220243011343009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +63,7 @@ MonoBehaviour:
   myManager: {fileID: 0}
   fishDebug: 0
   meshRenderer: {fileID: 8350316576688109313}
+  chasingLight: 0
 --- !u!114 &1823125441974060829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,22 +77,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avoidRadius: 1
---- !u!54 &4287248770300464634
-Rigidbody:
+--- !u!114 &3108106689908505384
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8350316576690301377}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_GameObject: {fileID: 2129986821996995544}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839d0878e3225a74692c2b604b75ea30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  withinTargetAreaDistance: 3.5
+  slowDownDistance: 5.5
+  chaseSpeed: 4
+  rotationSpeed: 1
+  timeCheckingLight: 4
 --- !u!1001 &8350316576690401121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,12 +156,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 11100000, guid: b571f3e49a473924998d589bb8280238, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b571f3e49a473924998d589bb8280238, type: 3}
---- !u!1 &8350316576690301377 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: b571f3e49a473924998d589bb8280238,
-    type: 3}
-  m_PrefabInstance: {fileID: 8350316576690401121}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8350316576690009569 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b571f3e49a473924998d589bb8280238,

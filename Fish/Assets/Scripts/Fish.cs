@@ -11,6 +11,9 @@ public class Fish : MonoBehaviour
     //Debug variables
     [SerializeField] bool fishDebug = false; public bool FishDebug { get => fishDebug; }
     [SerializeField] MeshRenderer meshRenderer;
+
+    //State machine variables
+    public bool chasingLight = false;
       
     //Add tint to the fish mesh to identify specific behaviours
     public void AddDebugColor(Color color)

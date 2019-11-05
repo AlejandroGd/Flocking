@@ -14,12 +14,28 @@ public class FlockBehaviour : BaseState
     bool turning = false;
     Vector3 direction = Vector3.zero;
 
+    public override void Awake()
+    {
+        fish = GetComponent<Fish>();
+
+        //Define the transitions from this state
+        transitions = new List<Transition>();
+
+        //If fish is assigned to chase the light, change to ChasingLight state
+        Transition t = new Transition(new ShouldChaseLight(fish), GetComponent<ChaseLight>());
+        transitions.Add(t);
+    }
 
     // Start is called before the first frame update
     void Start()
-    {
-        fish = GetComponent<Fish>();
+    {       
         speed = Random.Range(fish.myManager.MinSpeed, fish.myManager.MaxSpeed);
+    }
+
+    //State initialisation
+    public override void OnEnable()
+    {
+        fish.chasingLight = false;
     }
 
     // Update is called once per frame
@@ -103,6 +119,19 @@ public class FlockBehaviour : BaseState
                                         Quaternion.LookRotation(direction),        //Quaternion value for the target rotation
                                         fish.myManager.RotationSpeed * Time.deltaTime); //by the rotation speed scaled to the time passed between frames
             }
+        }
+    }
+    
+    //Condition to check if the fish has been assigned to chase the light ball
+    private class ShouldChaseLight : Condition
+    {
+        Fish fish;
+
+        public ShouldChaseLight(Fish fish) { this.fish = fish; }
+
+        public override bool Test()
+        {
+            return fish.chasingLight;
         }
     }
 }

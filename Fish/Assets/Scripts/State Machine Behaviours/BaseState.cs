@@ -14,6 +14,12 @@ public class Condition
 //Pair condition-target to state which condition change to a different state
 public class Transition
 {
+    public Transition(Condition condition, BaseState target)
+    {
+        this.condition = condition;
+        this.target = target;
+    }
+
     public Condition condition;
     public BaseState target;
 }
@@ -53,4 +59,3 @@ public class BaseState : MonoBehaviour
         }
     }
 }
-
