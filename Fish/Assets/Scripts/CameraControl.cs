@@ -37,22 +37,23 @@ public class CameraControl : MonoBehaviour
 
     private void GetMovement()
     {
-        if (Input.GetKey("up"))
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+
+        if (Input.GetAxis("Vertical") > 0)
         {
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
         }
-
-        if (Input.GetKey("down"))
+        else if (Input.GetAxis("Vertical") < 0)
         {
             transform.position += transform.forward * -moveSpeed * Time.deltaTime;
         }
 
-        if (Input.GetKey("right"))
+        if (Input.GetAxis("Horizontal") > 0)
         {
             transform.position += transform.right * moveSpeed * Time.deltaTime;
         }
-
-        if (Input.GetKey("left"))
+        else if (Input.GetAxis("Horizontal") < 0)
         {
             transform.position += transform.right * -moveSpeed * Time.deltaTime;
         }

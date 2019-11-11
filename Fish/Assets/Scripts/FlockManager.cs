@@ -28,10 +28,22 @@ public class FlockManager : MonoBehaviour
     [SerializeField] float rotationSpeed; public float RotationSpeed { get => rotationSpeed; }
 
 
-    [Header("Debug Options")]
-    [SerializeField] public bool FlockDebug = false;
+    [Header("Debug Options")]    
     [SerializeField] public GameObject debugBall;
     [SerializeField] public float rayCastDistance = 1f;
+
+    [SerializeField] bool flockDebug = false; public bool FlockDebug { get => flockDebug; }
+    public void SetFlockDebug(bool mode)
+    {
+        flockDebug = mode;
+        if (flockDebug == false)
+        {
+            foreach(GameObject f in allFish)
+            {
+                f.GetComponent<Fish>().AddDebugColor(Color.white);
+            }
+        }
+    }
 
 
     // Start is called before the first frame update

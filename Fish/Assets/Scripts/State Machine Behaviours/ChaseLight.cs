@@ -36,7 +36,7 @@ public class ChaseLight : BaseState
     {
         //Initialise Timer
         timer = timeCheckingLight;
-        thisFish.AddDebugColor(Color.white);
+        thisFish.AddDebugColor(Color.cyan);
     }
 
     // Update is called once per frame
