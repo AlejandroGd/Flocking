@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8063304381879124948}
   - component: {fileID: 8616394130826447187}
   - component: {fileID: 1540454592667019713}
+  - component: {fileID: 6997372432210115552}
   m_Layer: 9
   m_Name: Fish 11
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MonoBehaviour:
   fishDebug: 0
   meshRenderer: {fileID: 4060077584214649478}
   chasingLight: 0
+  fleeing: 0
 --- !u!114 &8616394130826447187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,8 +94,23 @@ MonoBehaviour:
   withinTargetAreaDistance: 3.5
   slowDownDistance: 5.5
   chaseSpeed: 4
-  rotationSpeed: 1
+  rotationSpeed: 2
   timeCheckingLight: 4
+--- !u!114 &6997372432210115552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568867174578784385}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3b3d7edf189c5429bf1757107e51b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  rotationSpeed: 4
+  fleeTimer: 1.5
 --- !u!1001 &4060077584212357862
 PrefabInstance:
   m_ObjectHideFlags: 0

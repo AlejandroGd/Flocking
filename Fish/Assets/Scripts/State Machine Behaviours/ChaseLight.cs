@@ -12,21 +12,22 @@ public class ChaseLight : BaseState
     [SerializeField] float timeCheckingLight = 4f;
     float timer = 4f; public float Timer { get => timeCheckingLight; }
 
-    LightBall lightBall;    
+    LightBall lightBall;
+    Fish thisFish;
     Vector3 direction = Vector3.zero;
 
     
     public override void Awake()
     {
         lightBall = FindObjectOfType<LightBall>();
+        thisFish = gameObject.GetComponent<Fish>();
 
         //Define the transitions from this state
         transitions = new List<Transition>();
 
-        //When the timer gets to 0, back to flock behaviour
-        Transition t = new Transition(new TimerReachedZero(this), gameObject.GetComponent<FlockBehaviour>());
-        transitions.Add(t);
-
+        //When the timer gets to 0, back to flock behaviour        
+        transitions.Add(new Transition(new TimerReachedZero(this), gameObject.GetComponent<FlockBehaviour>()));
+        
         this.enabled = false;
     }
     
@@ -35,6 +36,7 @@ public class ChaseLight : BaseState
     {
         //Initialise Timer
         timer = timeCheckingLight;
+        thisFish.AddDebugColor(Color.white);
     }
 
     // Update is called once per frame
@@ -55,8 +57,7 @@ public class ChaseLight : BaseState
         
         //If not reached the slow down distance, swim to the target
         if (squaredDistanceToBall > slowDownDistance * slowDownDistance)
-        {
-            
+        {            
             transform.position += transform.forward * chaseSpeed * Time.deltaTime;
         }
         //If within slow down distance but not reached target, slow down speed
@@ -73,13 +74,11 @@ public class ChaseLight : BaseState
         }
     }
 
-
     public override void OnDisable()
     {
         //Before leaving state, leave the lightball ready for another fish to check it out
         lightBall.fishAssigned = false;
     }
-
 
     //Derive a condition to return true when the timer reach zero
     private class TimerReachedZero : Condition

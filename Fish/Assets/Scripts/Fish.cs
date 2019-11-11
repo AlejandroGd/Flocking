@@ -14,6 +14,7 @@ public class Fish : MonoBehaviour
 
     //State machine variables
     public bool chasingLight = false;
+    public bool fleeing = false;
       
     //Add tint to the fish mesh to identify specific behaviours
     public void AddDebugColor(Color color)
@@ -22,12 +23,15 @@ public class Fish : MonoBehaviour
     }
 
     //Cast a front, left and right rays to check if the fish needs to turn due to obstacles.
-    //If it dies, direction returns a vector with the direction the fish needs to turn to.
+    //If it dies, direction returns a vector with the direction the fish needs to turn to.       
+    //Not having up and down raycast sometimes results in fish slightly getting into objects but, so far,#
+    //I do not think the difference was enough to worth the extra computing time.
     public bool IsTurningDueObstacles(ref Vector3 direction)
     {
         bool turning = false;
         RaycastHit hit = new RaycastHit();
         raycastDistance = myManager.rayCastDistance;
+
 
         if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, myManager.raycastLenght, LayerMask.GetMask("Obstacles")) ||
             Physics.Raycast(this.transform.position, this.transform.right, out hit, raycastDistance, LayerMask.GetMask("Obstacles")) ||
@@ -82,5 +86,13 @@ public class Fish : MonoBehaviour
         {
             return false;
         }
-    }    
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Submarine>())
+        {
+            fleeing = true;
+        }
+    }
 }

@@ -37,7 +37,6 @@ public class FlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-
         allFish = new GameObject[numFish];
         
         for (int i=0; i<numFish;i++)
