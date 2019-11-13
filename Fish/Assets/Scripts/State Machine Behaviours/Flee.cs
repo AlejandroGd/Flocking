@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** FLEE BEHAVIOUR
+ * 
+ * Any fish close to the moving submarine will try to rapidly swim away from it.
+ * Speed and rotation speed serialized as they will be specific from a flee behaviour.
+ */
 public class Flee : BaseState
 {
     [SerializeField] float speed = 10f;
@@ -31,11 +36,14 @@ public class Flee : BaseState
         timer = fleeTimer;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
+    //The fish will swim away from the submarine for a specific amount of time. (Which seems better than checking distances 
+    //for all fishes involved, which is more expensive in terms of computation if scaling, and still gets a nice result)
     void Update()
     {
         Vector3 direction = Vector3.zero;
 
+        //Avoiding obstacles and stay within the fishtank take preference over behaviour.
         bool turning = thisFish.IsTurningDueObstacles(ref direction);
         if (!turning) turning = thisFish.IsTurningDueSwimmingLimits(ref direction);
 
@@ -63,7 +71,7 @@ public class Flee : BaseState
         //Flee
         transform.position += transform.forward * speed * Time.deltaTime;
 
-        //UpdateTimer
+        //UpdateTimer 
         timer -= Time.deltaTime;       
     }
 

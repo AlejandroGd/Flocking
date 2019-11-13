@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Common functionality to all fishes independent of what state is active.
+/**Common functionality to all fishes independent of what state is active.
+ * 
+ * The movement of the fish is always forward. All behaviours will compute any change of direction and rotate the gameobject as necesary.
+ */
 public class Fish : MonoBehaviour
 {
     public FlockManager myManager;
     float raycastDistance = 1f;   
 
-    //Debug variables
-    [SerializeField] bool fishDebug = false; public bool FishDebug { get => fishDebug; }
+    //Debug variables    
     [SerializeField] MeshRenderer meshRenderer;
 
     //State machine variables
@@ -22,10 +24,12 @@ public class Fish : MonoBehaviour
         meshRenderer.material.color = color;
     }
 
-    //Cast a front, left and right rays to check if the fish needs to turn due to obstacles.
-    //If it dies, direction returns a vector with the direction the fish needs to turn to.       
-    //Not having up and down raycast sometimes results in fish slightly getting into objects but, so far,#
-    //I do not think the difference was enough to worth the extra computing time.
+    /**
+     * Casts a front, left and right rays to check if the fish needs to turn due to obstacles. If it dies, direction returns 
+     * a vector with the direction the fish needs to turn to. Not having up and down raycast sometimes results in fish slightly 
+     * getting into objects but, so far, I do not think the difference was enough to worth the extra computing time. (Right now 
+     * is just a small fish tank and may not seem different but I tried to keep it scalable just in case)     
+     */
     public bool IsTurningDueObstacles(ref Vector3 direction)
     {
         bool turning = false;
@@ -52,8 +56,8 @@ public class Fish : MonoBehaviour
         return turning;
     }
 
-    //Cast a front, left and right rays to check if the fish needs to turn due to being swimming out of limits.
-    //If it dies, direction contains the vector with the direction the fish needs to turn to.
+    //Checks if position is inside swim limits (within the fish tank and within swimming area)
+    //If it is not, direction contains the vector with the direction the fish needs to turn to to go back to the swimming area.
     public bool IsTurningDueSwimmingLimits(ref Vector3 direction)
     {
         bool turning = false;
@@ -66,6 +70,7 @@ public class Fish : MonoBehaviour
         }
         return turning;
     }
+
     //Combines the fish tank limits with the flock one and determines if the fish is within the union.
     //(both inside the fisk tank and in the flock swim limits)
     private bool IsOutsideSwimLimits()
@@ -88,6 +93,7 @@ public class Fish : MonoBehaviour
         }
     }
 
+    //The fleeing flag == true is condition to change to a flee state.
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Submarine>())

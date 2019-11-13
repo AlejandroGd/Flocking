@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** CHASE LIGHT BEHAVIOUR
+ * 
+ * Fishes will be checking the small light ball in the fish tank in turns. Only one fish will check the ball at a time.
+ * A fish within radius will get assigned to check the ball, will get close to it and stay close for a while, 
+ * when the timer gets to 0, the fish will go back to normal flock behaviour releasing the slot for another fish to check the ball after.
+ * 
+ */
+
 public class ChaseLight : BaseState
 {
     [SerializeField] float withinTargetAreaDistance = 3.5f;
@@ -36,10 +44,12 @@ public class ChaseLight : BaseState
     {
         //Initialise Timer
         timer = timeCheckingLight;
-        thisFish.AddDebugColor(Color.cyan);
+        if (thisFish.myManager.FlockDebug) thisFish.AddDebugColor(Color.cyan);
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
+    //The behaviour will make the fish to swim towards the ball and slow down its velocity once it reaches 
+    //the slowDown distance, to stop near the ball.
     void Update()
     {
         //Turn the fish towards the light ball

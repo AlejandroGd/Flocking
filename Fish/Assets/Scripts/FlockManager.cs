@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Technically, the flock behaviour may be self contained on the boid itself, but changing parameters 
+ * on each separate boid through inspector is a bit of a pain. This class has been created to allow real time 
+ * parameter twitching to find out which one is the optimal one in terms of perceived behaviour. Also, allow us to create 
+ * different flocks in specific parts of the tank. 
+ */
+
 public class FlockManager : MonoBehaviour
 {
     [SerializeField] GameObject fishPrefab;
     [SerializeField] int numFish = 20;    
     [SerializeField] public Vector3 swimAreaLimit = new Vector3(5, 5, 5);
     [SerializeField] Bounds tankLimit;
-
-    [SerializeField] bool movingTarget = false;
+    
     [SerializeField] public float raycastLenght = 25f;
 
-    [SerializeField] public GameObject target;
     public GameObject[] allFish;
 
     [Header("Fish Settings")]
@@ -28,10 +33,10 @@ public class FlockManager : MonoBehaviour
     [SerializeField] float rotationSpeed; public float RotationSpeed { get => rotationSpeed; }
 
 
-    [Header("Debug Options")]    
-    [SerializeField] public GameObject debugBall;
+    [Header("Debug Options")]        
     [SerializeField] public float rayCastDistance = 1f;
 
+    //Flag to activate/deactivate debug colors
     [SerializeField] bool flockDebug = false; public bool FlockDebug { get => flockDebug; }
     public void SetFlockDebug(bool mode)
     {
@@ -60,22 +65,8 @@ public class FlockManager : MonoBehaviour
 
             allFish[i] = Instantiate(fishPrefab, position, Quaternion.identity);
             allFish[i].GetComponent<Fish>().myManager = this;
-           // allFish[i].transform.parent = this.transform;           
+            allFish[i].transform.parent = this.transform;           
         }       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (movingTarget && Random.Range(0, 100) < 1)  ChangeTargetPosition();
-    }
-
-    private void ChangeTargetPosition()
-    {
-        SwimBoundary limits = GetSwimmingBoundary();
-        target.transform.position = new Vector3(Random.Range(limits.minX, limits.maxX),
-                                                Random.Range(limits.minY, limits.maxY),
-                                                Random.Range(limits.minZ, limits.maxZ));       
     }
 
     //The swim area may not be enclosed within the tank if the Flock manager is moved near to the edge of the fish tank.

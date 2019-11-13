@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
-{
-    [SerializeField] Vector3 initialPosition = new Vector3(-100, 0, 100);
+{    
     [SerializeField] float moveSpeed = 20f;
-    [SerializeField] float rotationSpeed = 50f;
+    [SerializeField] float rotationSpeed = 15f;
+
+    [SerializeField] float maxVerticalRotation = 70f;
 
     float rotationX = 0f;
     float rotationY = 0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //transform.position = initialPosition;
-    }
 
     // Update is called once per frame
     void Update()
@@ -24,6 +19,7 @@ public class CameraControl : MonoBehaviour
         GetMovement();
     }
 
+    //Translate mouse movement into camera rotation
     private void GetDirection()
     {
         float mouseX = Input.GetAxis("Mouse X");
@@ -32,9 +28,13 @@ public class CameraControl : MonoBehaviour
         rotationX += Input.GetAxis("Mouse X") * rotationSpeed;
         rotationY += Input.GetAxis("Mouse Y") * rotationSpeed;
 
+        //Limit vertical rotation to not end upside down
+        rotationY = Mathf.Clamp(rotationY, -maxVerticalRotation, maxVerticalRotation);
+
         Camera.main.transform.localRotation = Quaternion.Euler(-rotationY, rotationX, 0f);
     }
 
+    //Translate keyboard press into camera displacement
     private void GetMovement()
     {
         float vertical = Input.GetAxis("Vertical");

@@ -10,7 +10,7 @@ public class LightBall : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] float maxDisplacement = 2;
 
-    public bool fishAssigned = false;
+    public bool fishAssigned = false;  //Only one fish at a time. Rudimentary "slot" (already a fish on it or not) system.
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class LightBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Simulate floating movement
+        //Simulate floating movement using oscilating values of Sin function.
         temp += Time.deltaTime * speed;
         if (temp >= 360) temp -=360;
 

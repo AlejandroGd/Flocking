@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Just a simple "follow the points and loop back to beginning" trajectory
+ */
 public class Submarine : MonoBehaviour
 {
     [SerializeField] GameObject[] pathPoints;    
@@ -21,10 +24,12 @@ public class Submarine : MonoBehaviour
     {
         if ((gameObject.transform.position - pathPoints[currentPointIndex].transform.position).sqrMagnitude < targetReachedDistance * targetReachedDistance)
         {
+            //If reached the current point, use next as target.
             currentPointIndex = (currentPointIndex + 1) % pathPoints.Length;            
         }
         else
         {
+            //Apply rotation if needed
             Vector3 direction = pathPoints[currentPointIndex].transform.position - gameObject.transform.position;
             if (Vector3.Angle(transform.forward, direction) > 1)
             {
@@ -34,6 +39,7 @@ public class Submarine : MonoBehaviour
                                      Time.deltaTime * rotationSpeed);
             }
 
+            //Move
             transform.position += transform.forward * speed * Time.deltaTime;           
         }
     }

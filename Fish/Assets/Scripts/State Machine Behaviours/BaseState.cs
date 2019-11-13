@@ -24,7 +24,17 @@ public class Transition
     public BaseState target;
 }
 
-//Base class for a state
+/**BASE CLASS FOR A STATE
+ * 
+ * Awake:       Initialises a list of "transition condition -> target state"
+ * OnEnable:    Override for state variable inisialisation.
+ * OnDisable:   Override for out-of-state changes and variable cleanup.
+ * Update:      Contains state behaviour.
+ * LateUpdate:  Take advantage of late update to check change of state conditions after all gameobject updates have been calculated,
+ *              disabling the script and enabling the new state one if transiction conditions are met. 
+ *
+ */
+
 public class BaseState : MonoBehaviour
 {
     public List<Transition> transitions;
